@@ -96,6 +96,13 @@ app.controller("ComicsController", [
             $scope.comic.show = true;
             $scope.comic.skeleton = data;
          });
+
+         ngDialog.open({
+                          template : 'views/read.html',
+                          className: 'ngdialog-theme-default',
+                          scope    : $scope
+                       });
+
       };
 
       $scope.clickToOpen = function () {
