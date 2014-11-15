@@ -32,7 +32,6 @@ public class FolderService {
         data.setBrowseUri(this.uriInfo.getBaseUriBuilder()
                                       .path(this.getClass())
                                       .path("/")
-                                      .path(folder)
                                       .build()
                                       .toString());
         data.setFileUri(this.uriInfo.getBaseUriBuilder()

@@ -74,7 +74,7 @@ app.controller("ComicsController", [
    'restService',
    'ngDialog',
    function ($scope, folderService, focus, restService, ngDialog) {
-      $scope.debug = false;
+      $scope.debug = true;
 
       $scope.data = folderService.query();
       focus('searchBox');

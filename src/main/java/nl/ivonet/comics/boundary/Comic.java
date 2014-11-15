@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -32,9 +33,12 @@ public final class Comic implements Serializable {
     private Comic(final Builder builder) {
         this.filename = builder.filename;
         this.pages = Collections.unmodifiableMap(builder.pages);
-        this.firstPage = this.pages.get(this.pages.keySet()
-                                                  .iterator()
-                                                  .next());
+        final Iterator<String> iterator = this.pages.keySet()
+                                                    .iterator();
+
+        if (iterator.hasNext()) {
+            this.firstPage = this.pages.get(iterator.next());
+        }
     }
 
     public String getFilename() {
