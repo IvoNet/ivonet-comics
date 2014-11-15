@@ -1,0 +1,54 @@
+<div class="page-container">
+    <!-- top navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">IvoNet Comics</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2>{{data.folder.path}}</h2>
+    </div>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+            <!-- sidebar -->
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+
+                <label>
+                    <input type="text" data-ng-model="nameText" focus-on="searchBox" class="ivonet-search"/>
+                </label>
+                <button id="clear-filter" data-ng-click="clearSearchBox()" type="button">X</button>
+
+                <ul class="nav">
+                    <li data-ng-if="data.folder.path !== ''">
+                        <a href="" data-ng-click="browseFolder('/')">&DoubleLeftArrow; Home</a></li>
+                    <li data-ng-if="data.folder.path !== ''"><a href=""
+                                                                data-ng-click="browseFolder('..')">&DoubleUpArrow;
+                        Up</a></li>
+                    <li data-ng-repeat="folder in data.folder.folders | filter:nameText | orderBy : folder">
+                        <a href="" data-ng-click="browseFolder(folder)">{{ folder }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- main area -->
+            <div class="col-xs-12 col-sm-9">
+                <table class="table table-striped">
+                    <tr ng-repeat="file in data.folder.files | orderBy : file">
+                        <td><a href="{{createFileUri(file)}}">{{file}}</a></td>
+                    </tr>
+                </table>
+
+            </div>
+            <!-- /.col-xs-12 main -->
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.container-->
+    <pre data-ng-model="debug" data-ng-show="true">{{ data | json }}</pre>
+</div><!--/.page-container-->
