@@ -74,6 +74,8 @@ app.controller("ComicsController", [
    'restService',
    'ngDialog',
    function ($scope, folderService, focus, restService, ngDialog) {
+      $scope.debug = false;
+
       $scope.data = folderService.query();
       focus('searchBox');
 
@@ -91,17 +93,19 @@ app.controller("ComicsController", [
          var url = ($scope.data.downloadUri + $scope.data.folder.path
                     + "/" + filename).replace("#", "%23");
 
+         $scope.comic.image = null;
+
          restService.get(url).success(function (data) {
             $scope.comic.image = "data:image/jpg;base64, " + data.cover.data;
             $scope.comic.show = true;
             $scope.comic.skeleton = data;
+            ngDialog.open({
+                             template : 'views/read.html',
+                             className: 'ngdialog-theme-default',
+                             scope    : $scope
+                          });
          });
 
-         ngDialog.open({
-                          template : 'views/read.html',
-                          className: 'ngdialog-theme-default',
-                          scope    : $scope
-                       });
 
       };
 
