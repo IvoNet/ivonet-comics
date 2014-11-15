@@ -39,6 +39,10 @@ public class FolderService {
                                     .path(DownloadService.class)
                                     .build()
                                     .toString());
+        data.setDownloadUri(this.uriInfo.getBaseUriBuilder()
+                                        .path(ComicService.class)
+                                        .build()
+                                        .toString());
         return data;
     }
 

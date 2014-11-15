@@ -1,6 +1,7 @@
 var app = angular.module('ComicsApp', [
    'ngResource',
-   'ngRoute'
+   'ngRoute',
+   'ngDialog'
 ]);
 
 
@@ -71,9 +72,35 @@ app.controller("ComicsController", [
    'folderService',
    'focus',
    'restService',
-   function ($scope, folderService, focus, restService) {
+   'ngDialog',
+   function ($scope, folderService, focus, restService, ngDialog) {
       $scope.data = folderService.query();
       focus('searchBox');
+
+
+      function Comic() {
+         var show = false;
+         var image;
+         var sekeleton;
+      }
+
+      $scope.comic = new Comic();
+
+
+      $scope.readComic = function (filename) {
+         var url = ($scope.data.downloadUri + $scope.data.folder.path
+                    + "/" + filename).replace("#", "%23");
+
+         restService.get(url).success(function (data) {
+            $scope.comic.image = "data:image/jpg;base64, " + data.cover.data;
+            $scope.comic.show = true;
+            $scope.comic.skeleton = data;
+         });
+      };
+
+      $scope.clickToOpen = function () {
+         ngDialog.open({template: 'views/read.html'});
+      };
 
       $scope.createFileUri = function (filename) {
          return ($scope.data.fileUri + $scope.data.folder.path
@@ -107,6 +134,7 @@ app.controller("ComicsController", [
          $scope.nameText = "";
          focus('searchBox');
       };
+
 
    }
 ]);

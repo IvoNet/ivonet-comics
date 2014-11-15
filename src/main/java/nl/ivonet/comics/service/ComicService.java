@@ -27,12 +27,12 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Path("/comic")
 public class ComicService {
 
+    private static final String COMIC = ComicService.class.getName() + ".comic";
     @Inject private CbrReader cbrReader;
     @Inject @Property private String rootFolder;
 
-
     @GET
-    @Path("/{file: .+cbr}")
+    @Path("/{file: .+[cc][bB][rR]}")
     @Produces(APPLICATION_JSON)
     public Skeleton fetch(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
                           @PathParam("file") final String filename) {
@@ -43,7 +43,7 @@ public class ComicService {
     }
 
     @GET
-    @Path("/{file: .+cbr}/{page: .+[jJ][pP][gG]}")
+    @Path("/{file: .+[cc][bB][rR]}/{page: .+[jJ][pP][gG]}")
     @Produces(APPLICATION_JSON)
     public Page page(@Context final HttpServletRequest request, @PathParam("file") final String filename,
                      @PathParam("page") final String page) {
@@ -55,14 +55,17 @@ public class ComicService {
 
 
     private Comic retrieveComic(final HttpSession session, final String filename) {
-        final Object item = session.getAttribute(filename);
+        final Object item = session.getAttribute(COMIC);
         if (item != null) {
-            return (Comic) item;
+            final Comic comic = (Comic) item;
+            if (("/" + filename).equals(comic.getFilename())) {
+                return comic;
+            }
         }
         final File file = Paths.get(this.rootFolder, filename)
                                .toFile();
         final Comic comic = this.cbrReader.read(file);
-        session.setAttribute(filename, comic);
+        session.setAttribute(COMIC, comic);
         return comic;
     }
 
