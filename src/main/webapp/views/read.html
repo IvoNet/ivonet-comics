@@ -1,3 +1,12 @@
-<div class="container">
-    <img src="{{comic.image}}" class="window-height">
+<div class="ngdialog ngdialog-theme-default window-height">
+    <!--<div class="ngdialog-overlay"></div>-->
+    <div class="ngdialog-content">
+        <div class="ngdialog-message">
+            <img src="{{comic.image}}" class="image-height">
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="next()">►</button>
+        </div>
+        <div class="ngdialog-close">foo</div>
+    </div>
 </div>

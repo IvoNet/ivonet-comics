@@ -38,7 +38,6 @@ app.factory('focus', function ($rootScope, $timeout) {
 app.factory('folderService', [
    '$resource',
    function ($resource) {
-      //return $resource('resource/folder/browse=H/Hulk Special, De Verbijsterende 01-32 (c)', {}, {
       return $resource('resource/folder/', {}, {
                           query: {
                              method : 'GET',

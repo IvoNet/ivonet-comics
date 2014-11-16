@@ -68,5 +68,9 @@ body {
 }
 
 .window-height {
+    height: 100vh;
+}
+
+.image-height {
     height: 90vh;
 }
