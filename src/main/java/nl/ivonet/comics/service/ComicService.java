@@ -49,7 +49,7 @@ public class ComicService {
     }
 
     @GET
-    @Path("/{file: .+[cc][bB][rR]}/{page: .+[jJ][pP][gG]}")
+    @Path("/{file: .+[cc][bB][rR]}/{page: .+[jJ][pP][gG]}") //TODO [eE]?
     @Produces("image/jpeg")
     public Response cbrPage(@Context final HttpServletRequest request, @PathParam("file") final String filename,
                             @PathParam("page") final String page) {
@@ -69,7 +69,7 @@ public class ComicService {
     }
 
     @GET
-    @Path("/{file: .+[cc][bB][zZ]}/{page: .+[jJ][pP][gG]}")
+    @Path("/{file: .+[cc][bB][zZ]}/{page: .+[jJ][pP][gG]}") //TODO [eE]?
     @Produces("image/jpeg")
     public Response cbzPage(@Context final HttpServletRequest request, @PathParam("file") final String filename,
                             @PathParam("page") final String page) {
