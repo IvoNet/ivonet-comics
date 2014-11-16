@@ -30,7 +30,9 @@ public class CbzArchiveReader implements ArchiveReader {
                                     .toLowerCase()
                                     .endsWith("jpg") || p.getName()
                                                          .toLowerCase()
-                                                         .endsWith(".jpeg"))
+                                                         .endsWith("jpeg") || p.getName()
+                                                                               .toLowerCase()
+                                                                               .endsWith("png"))
                       .map(ZipEntry::getName)
                       .collect(Collectors.toList());
         } catch (final IOException e) {

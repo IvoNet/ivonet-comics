@@ -59,12 +59,32 @@ public class ComicService {
     }
 
     @GET
+    @Path("/{file: .+[cc][bB][rR]}/{page: .+[pP][nN][gG]}")
+    @Produces("image/png")
+    public Response cbrPagePng(@Context final HttpServletRequest request, @PathParam("file") final String filename,
+                               @PathParam("page") final String page) {
+//TODO What about the error siuations?
+        return Response.ok(this.cbrReader.page(buildFile(filename), page), "image/png")
+                       .build();
+    }
+
+    @GET
     @Path("/{file: .+[cc][bB][zZ]}/{page: .+[jJ][pP][gG]}")
     @Produces("image/jpeg")
     public Response cbzPage(@Context final HttpServletRequest request, @PathParam("file") final String filename,
                             @PathParam("page") final String page) {
 //TODO What about the error siuations?
         return Response.ok(this.cbzReader.page(buildFile(filename), page), "image/jpeg")
+                       .build();
+    }
+
+    @GET
+    @Path("/{file: .+[cc][bB][zZ]}/{page: .+[pP][nN][gG]}")
+    @Produces("image/png")
+    public Response cbzPagePng(@Context final HttpServletRequest request, @PathParam("file") final String filename,
+                               @PathParam("page") final String page) {
+//TODO What about the error siuations?
+        return Response.ok(this.cbzReader.page(buildFile(filename), page), "image/png")
                        .build();
     }
 
