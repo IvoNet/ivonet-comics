@@ -42,7 +42,6 @@
                         <td>{{file}}</td>
                         <td>
                             <button type="button" class="btn btn-link" ng-click="readComic(file)">Read</button>
-                            <!--<button type="button" class="btn btn-link" ng-click="clickToOpen()">Read</button>-->
                         </td>
                         <td><a href="{{createFileUri(file)}}">Download</a></td>
                     </tr>
@@ -55,5 +54,5 @@
     </div>
     <!--/.container-->
     <pre data-ng-model="debug" data-ng-show="debug">{{ data | json }}</pre>
-    <pre data-ng-model="debug" data-ng-show="debug">{{ comic | json }}</pre>
+    <pre data-ng-model="debug" data-ng-show="debug">{{ images | json }}</pre>
 </div><!--/.page-container-->

@@ -5,9 +5,11 @@ import nl.ivonet.comics.boundary.Comic;
 import nl.ivonet.comics.boundary.Comic.Builder;
 import nl.ivonet.helper.ArchiveToMemory;
 import nl.ivonet.helper.boundary.Memory;
+import nl.ivonet.helper.boundary.Resource;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.List;
 
 /**
  * @author Ivo Woltring
@@ -27,5 +29,14 @@ public class CbrReader {
         return builder.build();
     }
 
+    public List<String> pages(final File file) {
+        return this.rar.files(file);
+    }
+
+
+    public byte[] page(final File file, final String page) {
+        final Resource resource = this.rar.extract(file, page);
+        return resource != null ? resource.getData() : null;
+    }
 
 }
