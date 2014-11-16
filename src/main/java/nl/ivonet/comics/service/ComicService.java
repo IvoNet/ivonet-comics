@@ -15,8 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,21 +33,15 @@ public class ComicService {
     @Path("/{file: .+[cc][bB][rR]}")
     @Produces(APPLICATION_JSON)
     public List<Page> fetch(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
-                              @PathParam("file") final String filename) {
-        final List<String> uris = new ArrayList<>();
+                            @PathParam("file") final String filename) {
         final List<String> pages = this.cbrReader.pages(buildFile(filename));
-        for (final String page : pages) {
-            final String uri = uriInfo.getAbsolutePathBuilder()
-                                      .path(page)
-                                      .build()
-                                      .toString();
-            uris.add(uri);
-        }
-        Collections.sort(uris);
-        final List<Page> collect = uris.stream()
-                                       .map(p -> new Page(p))
-                                       .collect(Collectors.toList());
-        return collect;
+        return pages.stream()
+                    .map(p -> uriInfo.getAbsolutePathBuilder()
+                                     .path(p)
+                                     .build()
+                                     .toString())
+                    .map(Page::new)
+                    .collect(Collectors.toList());
     }
 
     @GET
@@ -66,20 +58,5 @@ public class ComicService {
         return Paths.get(this.rootFolder, filename)
                     .toFile();
     }
-
-//    private Comic retrieveComic(final HttpSession session, final String filename) {
-//        final Object item = session.getAttribute(COMIC);
-//        if (item != null) {
-//            final Comic comic = (Comic) item;
-//            if (("/" + filename).equals(comic.getFilename())) {
-//                return comic;
-//            }
-//        }
-//        final File file = Paths.get(this.rootFolder, filename)
-//                               .toFile();
-//        final Comic comic = this.cbrReader.read(file);
-//        session.setAttribute(COMIC, comic);
-//        return comic;
-//    }
 
 }

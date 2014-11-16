@@ -14,22 +14,12 @@ import java.util.List;
 public class CbrReader {
 
     @Inject private ArchiveToMemory rar;
-
     @Inject @Property private String rootFolder;
 
-
-//    public Comic read(final File file) {
-//        final Memory rar = this.rar.extract(file);
-//        final Builder builder = new Builder(this.rootFolder);
-//        builder.filename(rar.getFileName())
-//               .pages(rar.getResources());
-//        return builder.build();
-//    }
 
     public List<String> pages(final File file) {
         return this.rar.files(file);
     }
-
 
     public byte[] page(final File file, final String page) {
         final Resource resource = this.rar.extract(file, page);
