@@ -1,8 +1,10 @@
 package nl.ivonet.comics.service;
 
 import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.archive.ArchiveReader;
+import nl.ivonet.comics.archive.CbrArchiveReader;
+import nl.ivonet.comics.archive.CbzArchiveReader;
 import nl.ivonet.comics.boundary.Page;
-import nl.ivonet.comics.cbr.CbrReader;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -26,15 +28,53 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Path("/comic")
 public class ComicService {
 
-    @Inject private CbrReader cbrReader;
+    @Inject private CbrArchiveReader cbrReader;
+    @Inject private CbzArchiveReader cbzReader;
     @Inject @Property private String rootFolder;
 
     @GET
     @Path("/{file: .+[cc][bB][rR]}")
     @Produces(APPLICATION_JSON)
-    public List<Page> fetch(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
-                            @PathParam("file") final String filename) {
-        final List<String> pages = this.cbrReader.pages(buildFile(filename));
+    public List<Page> fetchCbr(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
+                               @PathParam("file") final String filename) {
+        return getPages(this.cbrReader, uriInfo, filename);
+    }
+
+    @GET
+    @Path("/{file: .+[cc][bB][zZ]}")
+    @Produces(APPLICATION_JSON)
+    public List<Page> fetchCbz(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
+                               @PathParam("file") final String filename) {
+        return getPages(this.cbzReader, uriInfo, filename);
+    }
+
+    @GET
+    @Path("/{file: .+[cc][bB][rR]}/{page: .+[jJ][pP][gG]}")
+    @Produces("image/jpeg")
+    public Response cbrPage(@Context final HttpServletRequest request, @PathParam("file") final String filename,
+                            @PathParam("page") final String page) {
+//TODO What about the error siuations?
+        return Response.ok(this.cbrReader.page(buildFile(filename), page), "image/jpeg")
+                       .build();
+    }
+
+    @GET
+    @Path("/{file: .+[cc][bB][zZ]}/{page: .+[jJ][pP][gG]}")
+    @Produces("image/jpeg")
+    public Response cbzPage(@Context final HttpServletRequest request, @PathParam("file") final String filename,
+                            @PathParam("page") final String page) {
+//TODO What about the error siuations?
+        return Response.ok(this.cbzReader.page(buildFile(filename), page), "image/jpeg")
+                       .build();
+    }
+
+    private File buildFile(final String filename) {
+        return Paths.get(this.rootFolder, filename)
+                    .toFile();
+    }
+
+    private List<Page> getPages(final ArchiveReader reader, final UriInfo uriInfo, final String filename) {
+        final List<String> pages = reader.pages(buildFile(filename));
         return pages.stream()
                     .map(p -> uriInfo.getAbsolutePathBuilder()
                                      .path(p)
@@ -42,21 +82,6 @@ public class ComicService {
                                      .toString())
                     .map(Page::new)
                     .collect(Collectors.toList());
-    }
-
-    @GET
-    @Path("/{file: .+[cc][bB][rR]}/{page: .+[jJ][pP][gG]}")
-    @Produces("image/jpeg")
-    public Response page(@Context final HttpServletRequest request, @PathParam("file") final String filename,
-                         @PathParam("page") final String page) {
-
-        return Response.ok(this.cbrReader.page(buildFile(filename), page), "image/jpeg")
-                       .build();
-    }
-
-    private File buildFile(final String filename) {
-        return Paths.get(this.rootFolder, filename)
-                    .toFile();
     }
 
 }
