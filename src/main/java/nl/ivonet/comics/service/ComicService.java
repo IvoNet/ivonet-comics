@@ -1,6 +1,7 @@
 package nl.ivonet.comics.service;
 
 import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.boundary.Page;
 import nl.ivonet.comics.cbr.CbrReader;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -32,7 +34,7 @@ public class ComicService {
     @GET
     @Path("/{file: .+[cc][bB][rR]}")
     @Produces(APPLICATION_JSON)
-    public List<String> fetch(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
+    public List<Page> fetch(@Context final UriInfo uriInfo, @Context final HttpServletRequest request,
                               @PathParam("file") final String filename) {
         final List<String> uris = new ArrayList<>();
         final List<String> pages = this.cbrReader.pages(buildFile(filename));
@@ -44,7 +46,10 @@ public class ComicService {
             uris.add(uri);
         }
         Collections.sort(uris);
-        return uris;
+        final List<Page> collect = uris.stream()
+                                       .map(p -> new Page(p))
+                                       .collect(Collectors.toList());
+        return collect;
     }
 
     @GET

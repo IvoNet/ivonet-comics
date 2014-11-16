@@ -1,7 +1,6 @@
 package nl.ivonet.comics.boundary;
 
 import nl.ivonet.comics.io.ImageBase64;
-import nl.ivonet.helper.boundary.Resource;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -84,15 +83,15 @@ public final class Comic implements Serializable {
             return this;
         }
 
-        public final Builder pages(final Map<String, Resource> pages) {
-            for (final String page : pages.keySet()) {
-                final Resource resource = pages.get(page);
-                final byte[] data = resource.getData();
-                final String value = this.base64.encodeToString(data);
-                this.pages.put(page, new Page(page, value));
-            }
-            return this;
-        }
+//        public final Builder pages(final Map<String, Resource> pages) {
+//            for (final String page : pages.keySet()) {
+//                final Resource resource = pages.get(page);
+//                final byte[] data = resource.getData();
+//                final String value = this.base64.encodeToString(data);
+//                this.pages.put(page, new Page(page, value));
+//            }
+//            return this;
+//        }
 
 
         /**
