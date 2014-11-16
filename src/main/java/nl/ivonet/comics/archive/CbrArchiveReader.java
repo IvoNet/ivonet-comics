@@ -6,6 +6,7 @@ import nl.ivonet.helper.boundary.Resource;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +20,9 @@ public class CbrArchiveReader implements ArchiveReader {
 
     @Override
     public List<String> pages(final File file) {
-        return this.rar.files(file);
+        final List<String> pages = this.rar.files(file);
+        Collections.sort(pages);
+        return pages;
     }
 
     @Override

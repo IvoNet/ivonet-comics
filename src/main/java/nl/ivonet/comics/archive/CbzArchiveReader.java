@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -20,21 +21,23 @@ public class CbzArchiveReader implements ArchiveReader {
     public List<String> pages(final File file) {
         try {
             final ZipFile zip = new ZipFile(file);
-            return zip.stream()
-                      .filter(p -> !p.isDirectory())
-                      .filter(p -> !p.getName()
-                                     .startsWith("."))
-                      .filter(p -> !p.getName()
-                                     .startsWith("__MACOSX"))
-                      .filter(p -> p.getName()
-                                    .toLowerCase()
-                                    .endsWith("jpg") || p.getName()
-                                                         .toLowerCase()
-                                                         .endsWith("jpeg") || p.getName()
+            final List<String> pages = zip.stream()
+                                          .filter(p -> !p.isDirectory())
+                                          .filter(p -> !p.getName()
+                                                         .startsWith("."))
+                                          .filter(p -> !p.getName()
+                                                         .startsWith("__MACOSX"))
+                                          .filter(p -> p.getName()
+                                                        .toLowerCase()
+                                                        .endsWith("jpg") || p.getName()
                                                                                .toLowerCase()
-                                                                               .endsWith("png"))
-                      .map(ZipEntry::getName)
-                      .collect(Collectors.toList());
+                                                                               .endsWith("jpeg") || p.getName()
+                                                                                                     .toLowerCase()
+                                                                                                     .endsWith("png"))
+                                          .map(ZipEntry::getName)
+                                          .collect(Collectors.toList());
+            Collections.sort(pages);
+            return pages;
         } catch (final IOException e) {
             throw new RuntimeException(e);
         }
