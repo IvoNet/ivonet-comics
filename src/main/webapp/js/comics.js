@@ -73,7 +73,7 @@ app.controller("ComicsController", [
    'restService',
    'Lightbox',
    function ($scope, folderService, focus, restService, Lightbox) {
-      $scope.debug = true;
+      $scope.debug = false;
 
       $scope.data = folderService.query();
       focus('searchBox');
@@ -82,7 +82,6 @@ app.controller("ComicsController", [
       $scope.readComic = function (filename) {
          var url = ($scope.data.downloadUri + $scope.data.folder.path
                     + "/" + filename).replace("#", "%23");
-
 
          restService.get(url).success(function (data) {
             $scope.images = data;
