@@ -30,13 +30,13 @@ public class CbzArchiveReader implements ArchiveReader {
                                           .filter(p -> p.getName()
                                                         .toLowerCase()
                                                         .endsWith("jpg") || p.getName()
-                                                                               .toLowerCase()
-                                                                               .endsWith("jpeg") || p.getName()
-                                                                                                     .toLowerCase()
-                                                                                                     .endsWith("png"))
+                                                                             .toLowerCase()
+                                                                             .endsWith("jpeg") || p.getName()
+                                                                                                   .toLowerCase()
+                                                                                                   .endsWith("png"))
                                           .map(ZipEntry::getName)
                                           .collect(Collectors.toList());
-            Collections.sort(pages);
+            Collections.sort(pages); //TODO in lambda?????
             return pages;
         } catch (final IOException e) {
             throw new RuntimeException(e);
