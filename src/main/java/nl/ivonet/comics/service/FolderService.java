@@ -17,7 +17,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 /**
  * @author Ivo Woltring
  */
-@Path("/folder")
+@Path("/folders")
 public class FolderService {
     @Context UriInfo uriInfo;
     @Inject private Directory directory;

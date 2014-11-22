@@ -1,0 +1,16 @@
+<div class="modal-body" ng-swipe-left="Lightbox.nextImage()" ng-swipe-right="Lightbox.prevImage()">
+    <div class="lightbox-nav">
+        <button class="close" aria-hidden="true" ng-click="$dismiss()">×</button>
+        <div class="btn-group"><a class="btn btn-xs btn-default" ng-click="Lightbox.prevImage()"><span
+                class="glyphicon glyphicon-arrow-left"></span></a><a
+                ng-href="{{Lightbox.imageUrl}}" target="_blank" class="btn btn-xs btn-default" title="Open in new
+            tab"><span class="glyphicon glyphicon-open"></span></a> <a class="btn btn-xs btn-default"
+                                                                       ng-click="Lightbox.nextImage()"><span
+                class="glyphicon glyphicon-arrow-right"></span></a>
+        </div>
+    </div>
+    <div class="lightbox-image-container">
+        <!--<div class="lightbox-image-caption"><span>{{Lightbox.imageCaption}}</span></div>-->
+        <div><select ng-model="idx" ng-options="idx for idx in [] | range:0:Lightbox.lastImage()"></select></div>
+        <img lightbox-src="{{Lightbox.imageUrl}}" alt="{{Lightbox.lastImage()imageCaption}}"/></div>
+</div>

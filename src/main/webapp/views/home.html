@@ -39,11 +39,11 @@
             <div class="col-xs-12 col-sm-9">
                 <table class="table table-striped">
                     <tr ng-repeat="file in data.folder.files | orderBy : file">
-                        <td>{{file}}</td>
                         <td>
-                            <button type="button" class="btn btn-link" ng-click="readComic(file)">Read</button>
+                            <button type="button" class="btn btn-link" ng-click="readComic(file)">{{file}}</button>
                         </td>
-                        <td><a href="{{createFileUri(file)}}">Download</a></td>
+                        <td><a href="{{createFileUri(file)}}" class="btn btn-link" tooltip="Read"><span
+                                class="glyphicon glyphicon-download"></span></a></td>
                     </tr>
                 </table>
 

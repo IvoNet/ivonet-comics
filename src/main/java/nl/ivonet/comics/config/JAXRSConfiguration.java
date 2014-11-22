@@ -6,6 +6,6 @@ import javax.ws.rs.core.Application;
 /**
  * @author Ivo Woltring
  */
-@ApplicationPath("resource")
+@ApplicationPath("resources")
 public class JAXRSConfiguration extends Application {
 }
