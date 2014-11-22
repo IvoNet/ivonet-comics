@@ -1,9 +1,5 @@
 var app = angular.module('ComicsApp', [
-   'ngResource',
    'ngRoute',
-   'bootstrapLightbox',
-   'FocusModule',
-   'RestClient',
    'ComicsController'
 ]).filter('range', function () {
    return function (input, start, end) {

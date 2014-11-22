@@ -1,6 +1,10 @@
-<div class="modal-body" data-ng-swipe-left="Lightbox.nextImage()" data-ng-swipe-right="Lightbox.prevImage()">
+<div class="modal-body"
+     data-ng-swipe-left="Lightbox.nextImage()"
+     data-ng-swipe-right="Lightbox.prevImage()">
     <div class="lightbox-nav">
-        <button class="close" aria-hidden="true" data-ng-click="$dismiss()">×</button>
+        <button class="close" aria-hidden="true" data-ng-click="$dismiss()">
+            <span class="glyphicon glyphicon-eye-close"></span>
+        </button>
         <div class="btn-group">
             <a class="btn btn-xs btn-default" data-ng-click="Lightbox.prevImage()">
                 <span class="glyphicon glyphicon-arrow-left"></span>
@@ -10,8 +14,8 @@
             </a>
             <select class="btn btn-default lightbox-btn-select"
                     data-ng-model="Lightbox.image"
-                    data-ng-options="Lightbox.images.indexOf(idx) for idx in Lightbox.images"
-                    data-ng-change="Lightbox.setImage(Lightbox.images.indexOf(Lightbox.image))">
+                    data-ng-options="page for page in Lightbox.pages()"
+                    data-ng-change="Lightbox.update()">
             </select>
             <a class="btn btn-xs btn-default" data-ng-click="Lightbox.nextImage()">
                 <span class="glyphicon glyphicon-arrow-right"></span>
@@ -19,9 +23,5 @@
         </div>
     </div>
     <div class="lightbox-image-container">
-        <div class="lightbox-image-caption">
-            <span>{{Lightbox.imageCaption}}</span>
-        </div>
-        <img lightbox-src="{{Lightbox.imageUrl}}" alt="{{Lightbox.imageCaption}}"/>
-    </div>
+        <img lightbox-src="{{Lightbox.imageUrl}}" alt="{{Lightbox.imageCaption}}"/></div>
 </div>
