@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 cd ..
-mvn clean package
+mvn clean -P clean
+mvn package -P bower
 cd docker
 mv ../artifact/ivonet-comics.war ./
 

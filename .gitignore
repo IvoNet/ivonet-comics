@@ -35,5 +35,9 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 
 ## Added by IvoNet
-*.war
+**/*.war
+**/**deployed
 src/main/webapp/vendor/
+
+artifact/
+target/
