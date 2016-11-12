@@ -22,6 +22,8 @@ mvn package -P bower
 
 Note that you need to set the `rootFolder` property to a location where your comics reside.
 
+For the docker container this needs to be set to /comics
+
 
 # Deep clean
 
