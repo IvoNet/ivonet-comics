@@ -1,6 +1,6 @@
 package nl.ivonet.comics.service;
 
-import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.config.Property;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -19,7 +19,9 @@ public class DownloadService {
     public static final String APPLICATION_X_CBR = "application/x-cbr";
     public static final String DOWNLOAD = "/download";
 
-    @Inject @Property private String rootFolder;
+    @Inject
+    @Property
+    private String rootFolder;
 
 
     @GET

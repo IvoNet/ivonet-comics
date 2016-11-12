@@ -1,6 +1,6 @@
 package nl.ivonet.comics.archive;
 
-import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.config.Property;
 import nl.ivonet.helper.ArchiveToMemory;
 import nl.ivonet.helper.boundary.Resource;
 
@@ -14,8 +14,11 @@ import java.util.List;
  */
 public class CbrArchiveReader implements ArchiveReader {
 
-    @Inject private ArchiveToMemory rar;
-    @Inject @Property private String rootFolder;
+    @Inject
+    private ArchiveToMemory rar;
+    @Inject
+    @Property
+    private String rootFolder;
 
 
     @Override

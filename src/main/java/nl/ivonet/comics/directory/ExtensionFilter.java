@@ -16,11 +16,11 @@
 
 package nl.ivonet.comics.directory;
 
-import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.config.Property;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
+import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -29,11 +29,13 @@ import java.util.stream.Stream;
 /**
  * @author Ivo Woltring
  */
-public class ExtensionFilter implements DirectoryStream.Filter<Path> {
+public class ExtensionFilter implements Filter<Path> {
 
     private static final String DELIMETER = ":";
 
-    @Inject @Property private String filterExtensions;
+    @Inject
+    @Property
+    private String filterExtensions;
 
     @Override
     public boolean accept(final Path entry) throws IOException {

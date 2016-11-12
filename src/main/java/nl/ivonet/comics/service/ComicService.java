@@ -1,10 +1,10 @@
 package nl.ivonet.comics.service;
 
-import nl.ivonet.cdi_properties.Property;
 import nl.ivonet.comics.archive.ArchiveReader;
 import nl.ivonet.comics.archive.CbrArchiveReader;
 import nl.ivonet.comics.archive.CbzArchiveReader;
 import nl.ivonet.comics.boundary.Page;
+import nl.ivonet.comics.config.Property;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +28,13 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Path("/comic")
 public class ComicService {
 
-    @Inject private CbrArchiveReader cbrReader;
-    @Inject private CbzArchiveReader cbzReader;
-    @Inject @Property private String rootFolder;
+    @Inject
+    private CbrArchiveReader cbrReader;
+    @Inject
+    private CbzArchiveReader cbzReader;
+    @Inject
+    @Property
+    private String rootFolder;
 
     @GET
     @Path("/{file: .+[cc][bB][rR]}")

@@ -20,11 +20,6 @@
             <version>2.13</version>
         </dependency>
         <dependency>
-            <groupId>nl.ivonet</groupId>
-            <artifactId>cdi-properties</artifactId>
-            <version>1.5</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -90,6 +85,17 @@
     </profiles>
     <build>
         <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <warName>${project.artifactId}</warName>
+                    <outputDirectory>artifact</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

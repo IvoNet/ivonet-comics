@@ -15,16 +15,14 @@ var app = angular.module('ComicsApp', [
 });
 
 app.config([
-              '$routeProvider',
-              function ($routeProvider) {
-                 $routeProvider.
-                       when('/', {
-                               templateUrl: 'views/home.html',
-                               controller : 'ComicsController'
-                            }).
-                       otherwise({redirectTo: '/'});
-              }
-           ]);
+  '$routeProvider',
+  function ($routeProvider) {
+    $routeProvider.when('/', {
+      templateUrl: 'views/home.html',
+      controller: 'ComicsController'
+    }).otherwise({redirectTo: '/'});
+  }
+]);
 
 
 

@@ -16,7 +16,7 @@
 
 package nl.ivonet.comics.directory;
 
-import nl.ivonet.cdi_properties.Property;
+import nl.ivonet.comics.config.Property;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -32,9 +32,13 @@ import java.nio.file.Paths;
  */
 public class Directory {
 
-    @Inject @Property private String rootFolder;
-    @Inject private DirectoryFilter directoryFilter;
-    @Inject private ExtensionFilter extensionFilter;
+    @Inject
+    @Property
+    private String rootFolder;
+    @Inject
+    private DirectoryFilter directoryFilter;
+    @Inject
+    private ExtensionFilter extensionFilter;
 
     public Folder folder(final String path) {
         final Path dir = Paths.get(this.rootFolder + path);

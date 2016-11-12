@@ -1,7 +1,7 @@
 package nl.ivonet.comics.service;
 
-import nl.ivonet.cdi_properties.Property;
 import nl.ivonet.comics.boundary.Data;
+import nl.ivonet.comics.config.Property;
 import nl.ivonet.comics.directory.Directory;
 
 import javax.inject.Inject;
