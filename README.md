@@ -42,6 +42,18 @@ mvn clean -P clean
 * [ngmodules](http://ngmodules.org)
 * [ng-newsletter](http://www.ng-newsletter.com)
 
+# Synology
+
+If you have a docker enabled Synology NAS You can have a lot of fun with this simple website
+
+Just pull 'ivonet/comics' from the registry
+
+* map the volume `YOUR_COMICS_FOLDER` to `/comics`
+* port XXX to `8080` where XXX is a port of your choosing that is not yet in use in your network
+* give the correct rights to the `YOUR_COMICS_FOLDER` so that the docker container can read from it
+* now go to the IP address of the nas with the XXX port (e.g. http://192.168.1.55:32900)
+* have fun
+
 # License
 
         Copyright 2016 Ivo Woltring <WebMaster@ivonet.nl>
