@@ -17,14 +17,14 @@
 package nl.ivonet.comics.directory;
 
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
+import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
  * @author Ivo Woltring
  */
-public class DirectoryFilter implements DirectoryStream.Filter<Path> {
+public class DirectoryFilter implements Filter<Path> {
 
     @Override
     public boolean accept(final Path entry) throws IOException {

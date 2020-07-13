@@ -28,20 +28,24 @@ public class FolderService {
         data.setBaseUri(this.uriInfo.getBaseUriBuilder()
                                     .path(this.getClass())
                                     .build()
-                                    .toString());
+                                    .toString()
+                                    .replace("http:", "https:"));
         data.setBrowseUri(this.uriInfo.getBaseUriBuilder()
                                       .path(this.getClass())
                                       .path("/")
                                       .build()
-                                      .toString());
+                                      .toString()
+                                      .replace("http:", "https:"));
         data.setFileUri(this.uriInfo.getBaseUriBuilder()
-                                    .path(DownloadService.class)
+                                    .path(ComicService.class)
                                     .build()
-                                    .toString());
+                                    .toString()
+                                    .replace("http:", "https:"));
         data.setDownloadUri(this.uriInfo.getBaseUriBuilder()
-                                        .path(ComicService.class)
+                                        .path(DownloadService.class)
                                         .build()
-                                        .toString());
+                                        .toString()
+                                        .replace("http:", "https:"));
         return data;
     }
 

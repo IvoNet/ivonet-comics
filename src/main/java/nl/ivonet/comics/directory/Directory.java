@@ -44,17 +44,17 @@ public class Directory {
         final Path dir = Paths.get(this.rootFolder + path);
         final Folder folder = new Folder(path);
 
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, this.directoryFilter)) {
+        try (final DirectoryStream<Path> stream = Files.newDirectoryStream(dir, this.directoryFilter)) {
             for (final Path entry : stream) {
 
                 folder.addFolder(entry.getFileName()
                                       .toString());
 
             }
-        } catch (IOException x) {
+        } catch (final IOException x) {
             throw new RuntimeException(x);
         }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, this.extensionFilter)) {
+        try (final DirectoryStream<Path> stream = Files.newDirectoryStream(dir, this.extensionFilter)) {
             for (final Path entry : stream) {
                 final String filename = entry.getFileName()
                                              .toString();
